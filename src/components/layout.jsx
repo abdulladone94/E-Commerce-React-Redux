@@ -1,3 +1,4 @@
+import CartTab from "./cartTab";
 import Header from "./header";
 import { Outlet } from "react-router-dom";
 
@@ -8,6 +9,7 @@ const Layout = () => {
         <Header />
         <Outlet />
       </main>
+      <CartTab />
     </div>
   );
 };
