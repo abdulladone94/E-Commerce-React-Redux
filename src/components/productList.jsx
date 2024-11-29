@@ -1,9 +1,18 @@
 import { Link } from "react-router-dom";
 import cartIcon from "../assets/images/iconCart.png";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../store/cartSlice";
 
 const ProductList = (props) => {
   // eslint-disable-next-line react/prop-types
-  const { name, price, image, slug } = props.data;
+  const { id, name, price, image, slug } = props.data;
+  const dispatch = useDispatch();
+  const carts = useSelector((store) => store.cart.items);
+  console.log(carts);
+
+  const handleAddToCart = () => {
+    dispatch(addToCart({ productId: id, itemQuentity: 1 }));
+  };
 
   return (
     <div className="bg-white rounded-xl p-5 shadow-sm">
@@ -19,7 +28,10 @@ const ProductList = (props) => {
         <p className="font-semibold text-xl">
           $ <span className="text-2xl font-medium">{price}</span>
         </p>
-        <button className="flex items-center gap-5 bg-gray-300 p-2 rounded-md text-sm hover:bg-gray-400">
+        <button
+          className="flex items-center gap-5 bg-gray-300 p-2 rounded-md text-sm hover:bg-gray-400"
+          onClick={handleAddToCart}
+        >
           <img src={cartIcon} alt="cartIcon" className="w-5" />
           Add To Cart
         </button>
