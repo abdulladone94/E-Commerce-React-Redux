@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   items: [],
+  cartTabStatus: false,
 };
 
 export const cartSlice = createSlice({
@@ -34,8 +35,15 @@ export const cartSlice = createSlice({
       }
       localStorage.setItem("carts", JSON.stringify(state.items));
     },
+    cartTabToggle(status) {
+      if (status.cartTabStatus === false) {
+        status.cartTabStatus = true;
+      } else {
+        status.cartTabStatus = false;
+      }
+    },
   },
 });
 
-export const { addToCart, changeQuantity } = cartSlice.actions;
+export const { addToCart, changeQuantity, cartTabToggle } = cartSlice.actions;
 export default cartSlice.reducer;
