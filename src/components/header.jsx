@@ -22,7 +22,7 @@ const Header = () => {
   };
 
   return (
-    <header className="flex justify-between items-center mb-5">
+    <header className="flex justify-between items-center m-4">
       <Link to="/" className="text-xl font-semibold">
         Home
       </Link>

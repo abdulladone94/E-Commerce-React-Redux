@@ -39,8 +39,8 @@ const CartItem = (props) => {
   };
   return (
     <div className="flex justify-between items-center bg-slate-600 text-white p-2 border-b-2 border-slate-700 gap-5 rounded-md">
-      <img src={detail.image} alt="product" className="w-12" />
-      <h3>{detail.name}</h3>
+      <img src={detail.image} alt="product" className="w-8 md:w-12" />
+      <h3 className="text-sm">{detail.name}</h3>
       <p>${detail.price * itemQuentity}</p>
       <div className="w-20 flex justify-between gap-2">
         <button

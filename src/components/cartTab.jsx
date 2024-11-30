@@ -15,7 +15,7 @@ const CartTab = () => {
 
   return (
     <div
-      className={`fixed top-0 right-0 w-72  xl:w-96 bg-gray-700 h-full grid grid-rows-[60px_1fr_60px] transition-transform duration-500 ${
+      className={`fixed top-0 right-0 w-72 md:w-80 xl:w-96 bg-gray-700 h-full grid grid-rows-[60px_1fr_60px] transition-transform duration-500 ${
         cartStatusTab === false ? "translate-x-full" : ""
       }`}
     >
