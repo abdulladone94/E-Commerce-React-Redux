@@ -1,13 +1,14 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../store/cartSlice";
-import { products } from "../../product";
 
 const DetailProduct = () => {
   const [productDetail, setProductDetail] = useState([]);
   const [itemQuentity, setItemQuentity] = useState(0);
-  console.log(productDetail);
+
+  const products = useSelector((state) => state.cart.ferchProducts);
+
   const { slug } = useParams();
   const dispatch = useDispatch();
   useEffect(() => {
@@ -17,7 +18,7 @@ const DetailProduct = () => {
     } else {
       window.location.href = "/";
     }
-  }, [slug]);
+  }, [slug, products]);
 
   const handlePlusClick = () => {
     setItemQuentity(itemQuentity + 1);

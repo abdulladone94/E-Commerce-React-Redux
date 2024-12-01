@@ -1,8 +1,10 @@
 import ProductSearch from "@/components/productSearch";
-import { products } from "../../product";
 import ProductList from "../components/productList";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const products = useSelector((state) => state.cart.ferchProducts);
+
   return (
     <div>
       <div className="flex flex-col md:flex-row md:items-center justify-between m-2 md:mb-5 gap-2">

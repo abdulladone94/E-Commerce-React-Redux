@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { products } from "../../product";
 
 const initialState = {
+  ferchProducts: products,
   items: localStorage.getItem("carts")
     ? JSON.parse(localStorage.getItem("carts"))
     : [],
@@ -16,7 +18,6 @@ export const cartSlice = createSlice({
       const findIndex = state.items.findIndex(
         (index) => index.productId === productId
       );
-      console.log(findIndex);
       if (findIndex >= 0) {
         state.items[findIndex].itemQuentity += itemQuentity;
       } else {

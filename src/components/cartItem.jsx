@@ -1,23 +1,23 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { changeQuantity } from "../store/cartSlice";
-import { products } from "../../product";
 
 const CartItem = (props) => {
   //   eslint-disable-next-line react/prop-types
   const { productId, itemQuentity } = props.item;
   const [detail, setDetail] = useState([]);
 
+  const products = useSelector((state) => state.cart.ferchProducts);
+
   const dispatch = useDispatch();
 
-  console.log(detail);
   useEffect(() => {
     const findDetail = products.filter(
       (product) => product.id === productId
     )[0];
     setDetail(findDetail);
     console.log(findDetail);
-  }, [productId]);
+  }, [productId, products]);
 
   const handleMinusQuantity = () => {
     dispatch(
