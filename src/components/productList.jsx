@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
 import cartIcon from "../assets/images/iconCart.png";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { addToCart } from "../store/cartSlice";
 
 const ProductList = (props) => {
   // eslint-disable-next-line react/prop-types
   const { id, name, price, image, slug } = props.data;
   const dispatch = useDispatch();
-  const carts = useSelector((store) => store.cart.items);
-  console.log(carts);
 
   const handleAddToCart = () => {
     dispatch(addToCart({ productId: id, itemQuentity: 1 }));

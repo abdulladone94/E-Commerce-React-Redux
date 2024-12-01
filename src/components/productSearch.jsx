@@ -2,16 +2,22 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, X } from "lucide-react";
+import { useDispatch } from "react-redux";
+import { setSearchQuery } from "@/store/cartSlice";
 
 export default function ProductSearch() {
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchValue, setSearchValue] = useState("");
+  const dispatch = useDispatch();
 
   const handleInputChange = (e) => {
-    setSearchQuery(e.target.value);
+    const inputValue = e.target.value;
+    setSearchValue(inputValue);
+    dispatch(setSearchQuery(inputValue));
   };
 
   const handleClearInput = () => {
-    setSearchQuery("");
+    setSearchValue("");
+    dispatch(setSearchQuery(""));
   };
 
   return (
@@ -20,11 +26,11 @@ export default function ProductSearch() {
       <Input
         type="text"
         placeholder="Search products..."
-        value={searchQuery}
+        value={searchValue}
         onChange={handleInputChange}
         className="pl-8 pr-10"
       />
-      {searchQuery && (
+      {searchValue && (
         <Button
           variant="ghost"
           size="icon"

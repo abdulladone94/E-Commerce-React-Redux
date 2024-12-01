@@ -4,6 +4,11 @@ import { useSelector } from "react-redux";
 
 const Home = () => {
   const products = useSelector((state) => state.cart.ferchProducts);
+  const srarchQuery = useSelector((state) => state.cart.searchQuery);
+
+  const productFilter = products.filter((product) =>
+    product.name?.toLowerCase().includes(srarchQuery.toLowerCase())
+  );
 
   return (
     <div>
@@ -12,7 +17,7 @@ const Home = () => {
         <ProductSearch />
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-5">
-        {products.map((product) => (
+        {productFilter.map((product) => (
           <ProductList key={product.id} data={product} />
         ))}
       </div>

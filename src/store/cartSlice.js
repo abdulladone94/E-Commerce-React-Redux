@@ -7,6 +7,7 @@ const initialState = {
     ? JSON.parse(localStorage.getItem("carts"))
     : [],
   cartTabStatus: false,
+  searchQuery: "",
 };
 
 export const cartSlice = createSlice({
@@ -18,6 +19,7 @@ export const cartSlice = createSlice({
       const findIndex = state.items.findIndex(
         (index) => index.productId === productId
       );
+      console.log(state);
       if (findIndex >= 0) {
         state.items[findIndex].itemQuentity += itemQuentity;
       } else {
@@ -46,9 +48,12 @@ export const cartSlice = createSlice({
         status.cartTabStatus = false;
       }
     },
+    setSearchQuery(state, action) {
+      state.searchQuery = action.payload;
+    },
   },
 });
 
-export const { addToCart, changeQuantity, cartTabToggle, searchProduct } =
+export const { addToCart, changeQuantity, cartTabToggle, setSearchQuery } =
   cartSlice.actions;
 export default cartSlice.reducer;
