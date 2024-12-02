@@ -7,6 +7,7 @@ import { cartTabToggle } from "../store/cartSlice";
 const Header = () => {
   const [totalCartItems, setTotlaCartItems] = useState(0);
   const cartItems = useSelector((state) => state.cart.items);
+  const loggedUser = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,14 +27,25 @@ const Header = () => {
       <Link to="/" className="text-xl font-semibold">
         Home
       </Link>
-      <div
-        className="w-10 h-10 bg-blue-300 rounded-full relative flex items-center justify-center"
-        onClick={handleCartToggle}
-      >
-        <img src={iconCart} alt="cart" className="w-6" />
-        <span className="absolute top-2/3 right-1/2 w-5 h-5 bg-red-500 flex items-center justify-center text-white rounded-full text-sm">
-          {totalCartItems}
-        </span>
+      <div className="flex  items-center">
+        <Link
+          to="/sign-in"
+          className="font-semibold mr-3 md:mr-8 outline outline-offset-1 md:px-5 rounded-md"
+        >
+          Logout
+        </Link>
+        <p className="hidden md:block font-semibold md:mr-8 md:px-5 rounded-md">
+          {loggedUser.name}
+        </p>
+        <div
+          className="w-10 h-10 bg-blue-300 rounded-full relative flex items-center justify-center"
+          onClick={handleCartToggle}
+        >
+          <img src={iconCart} alt="cart" className="w-6" />
+          <span className="absolute top-2/3 right-1/2 w-5 h-5 bg-red-500 flex items-center justify-center text-white rounded-full text-sm">
+            {totalCartItems}
+          </span>
+        </div>
       </div>
     </header>
   );
