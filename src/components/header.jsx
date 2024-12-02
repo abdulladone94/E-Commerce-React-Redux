@@ -24,7 +24,10 @@ const Header = () => {
 
   return (
     <header className="flex justify-between items-center m-4">
-      <Link to="/" className="text-xl font-semibold">
+      <Link
+        to="/"
+        className="text-xl font-semibold outline outline-offset-1 rounded-md md:px-5 mr-3 md:mr-8"
+      >
         Home
       </Link>
       <div className="flex  items-center">
