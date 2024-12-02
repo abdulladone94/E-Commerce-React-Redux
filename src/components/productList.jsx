@@ -13,19 +13,20 @@ const ProductList = (props) => {
   };
 
   return (
-    <div className="bg-white rounded-xl p-5 shadow-sm">
+    <div className="bg-white rounded-xl px-5 py-3 shadow-sm">
       <Link to={slug}>
         <img
           src={image}
           alt="proImage"
           className="w-full h-60 object-contain"
         />
+
+        <h3 className="h-20 text-2xl py-1 text-center font-medium">{name}</h3>
+        <p className="h-28 text-sm py-3 text-justify text-clip overflow-hidden">
+          {description}
+        </p>
       </Link>
-      <h3 className="h-20 text-2xl py-1 text-center font-medium">{name}</h3>
-      <p className="h-28 text-sm py-3 text-justify text-clip overflow-hidden">
-        {description}
-      </p>
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between mt-2">
         <p className="font-semibold text-xl">
           $ <span className="text-2xl font-medium">{price}</span>
         </p>

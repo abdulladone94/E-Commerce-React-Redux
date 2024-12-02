@@ -26,14 +26,14 @@ const Header = () => {
     <header className="flex justify-between items-center m-4">
       <Link
         to="/"
-        className="text-xl font-semibold outline outline-offset-1 rounded-md md:px-5 mr-3 md:mr-8"
+        className="w-24 flex items-center justify-center font-semibold outline outline-offset-1 rounded-md hover:bg-blue-300"
       >
         Home
       </Link>
       <div className="flex  items-center">
         <Link
           to="/sign-in"
-          className="font-semibold mr-3 md:mr-8 outline outline-offset-1 md:px-5 rounded-md"
+          className="w-24 font-semibold mr-3 md:mr-8 outline outline-offset-1 md:px-5 rounded-md hover:bg-blue-300"
         >
           Logout
         </Link>
@@ -41,7 +41,7 @@ const Header = () => {
           {loggedUser.name}
         </p>
         <div
-          className="w-10 h-10 bg-blue-300 rounded-full relative flex items-center justify-center"
+          className="w-10 h-10 rounded-full outline outline-offset-1 relative flex items-center justify-center hover:bg-blue-300"
           onClick={handleCartToggle}
         >
           <img src={iconCart} alt="cart" className="w-6" />
