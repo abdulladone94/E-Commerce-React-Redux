@@ -5,13 +5,18 @@ import { cartTabToggle } from "../store/cartSlice";
 const CartTab = () => {
   const cartItems = useSelector((store) => store.cart.items);
   const cartStatusTab = useSelector((store) => store.cart.cartTabStatus);
-  console.log(cartItems);
+  const products = useSelector((state) => state.cart.ferchProducts);
 
   const dispatch = useDispatch();
 
   const handleCloss = () => {
     dispatch(cartTabToggle());
   };
+
+  const totalAmount = cartItems.reduce((total, cartItem) => {
+    const product = products.find((prod) => prod.id === cartItem.productId);
+    return product ? total + product.price * cartItem.itemQuentity : total;
+  }, 0);
 
   return (
     <div
@@ -32,9 +37,9 @@ const CartTab = () => {
         >
           CLOSE
         </button>
-        <button className="md:text-2xl text-xl text-white bg-amber-600">
-          CHECKOUT
-        </button>
+        <p className="flex items-center justify-center md:text-2xl text-xl text-white bg-amber-600">
+          $ {totalAmount.toFixed(2)}
+        </p>
       </div>
     </div>
   );
