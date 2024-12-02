@@ -25,7 +25,7 @@ export default function SignUpForm() {
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string()
         .max(20, "Must be 20 characters or less")
-        .matches("^.{5}$", "Minimum any five characters required")
+        .matches("^.{5,10}$", "Minimum any five characters required")
         .required("Please enter your password"),
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password")], "Password do not match")
