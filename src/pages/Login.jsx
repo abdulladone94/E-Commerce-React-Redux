@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 // import { Eye, EyeOff } from "lucide-react";
@@ -7,12 +7,17 @@ import { login } from "@/store/authSlice";
 import { Link, useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { Loader2 } from "lucide-react";
 
 export default function LoginForm() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
+  const error = useSelector((state) => state.auth.error);
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -28,34 +33,14 @@ export default function LoginForm() {
 
     validationSchema: Yup.object({
       email: Yup.string().email("Invalid email address").required("Required"),
-      password: Yup.string()
-        .max(20, "Must be 20 characters or less")
-        // .matches("^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$", "Minimum eight characters, at least one letter and one number")
-        .required("Please enter your password"),
+      password: Yup.string().required("Please enter your password"),
     }),
     onSubmit: (values) => {
+      setIsLoading(true);
       dispatch(login(values));
-      if (isAuthenticated) {
-        navigate("/");
-      }
+      setIsLoading(false);
     },
   });
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   if (validateForm()) {
-  //     dispatch(login(formData));
-  //     if (isAuthenticated) {
-  //       navigate("/");
-  //     } else {
-  //       setErrors("Invalid email or password");
-  //     }
-
-  //     //   console.log("Form submitted:", formData);
-  //   } else {
-  //     console.log("Form has errors");
-  //   }
-  // };
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -63,6 +48,24 @@ export default function LoginForm() {
         <h2 className="mb-6 text-2xl font-bold text-center text-gray-800">
           Login
         </h2>
+        {isAuthenticated && (
+          <Alert className="mb-4">
+            <AlertDescription className="flex items-center justify-between">
+              <span>Login successful!</span>
+              {isLoading && (
+                <div className="flex items-center">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  <span>Redirecting...</span>
+                </div>
+              )}
+            </AlertDescription>
+          </Alert>
+        )}
+        {error && (
+          <Alert variant="destructive" className="mb-4">
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
         <form
           noValidate
           onSubmit={formik.handleSubmit}
@@ -77,6 +80,7 @@ export default function LoginForm() {
               onChange={formik.handleChange}
               placeholder="Your email address"
               aria-label="Email"
+              disabled={isLoading}
             />
             {formik.touched.email && formik.errors.email ? (
               <p className="text-red-500 text-sm mt-1">{formik.errors.email}</p>
@@ -92,6 +96,7 @@ export default function LoginForm() {
               onChange={formik.handleChange}
               placeholder="Create a password"
               aria-label="Password"
+              disabled={isLoading}
             />
 
             {formik.touched.password && formik.errors.password ? (
@@ -101,8 +106,15 @@ export default function LoginForm() {
             ) : null}
           </div>
 
-          <Button type="submit" className="w-full">
-            Login
+          <Button type="submit" disabled={isLoading} className="w-full">
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                Logging in...
+              </>
+            ) : (
+              "Login"
+            )}
           </Button>
         </form>
         <p className="mt-3">
