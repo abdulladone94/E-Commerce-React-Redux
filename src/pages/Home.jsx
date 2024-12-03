@@ -6,8 +6,14 @@ const Home = () => {
   const products = useSelector((state) => state.cart.ferchProducts);
   const srarchQuery = useSelector((state) => state.cart.searchQuery);
 
-  const productFilter = products.filter((product) =>
-    product.name?.toLowerCase().includes(srarchQuery.toLowerCase())
+  const productFilter = products.filter(
+    (product) =>
+      product.name?.toLowerCase().includes(srarchQuery.toLowerCase()) ||
+      product.description?.toLowerCase().includes(srarchQuery.toLowerCase()) ||
+      product.price
+        ?.toString()
+        .toLowerCase()
+        .includes(srarchQuery.toLowerCase())
   );
 
   return (
