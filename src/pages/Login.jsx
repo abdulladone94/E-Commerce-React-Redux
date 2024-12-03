@@ -21,7 +21,11 @@ export default function LoginForm() {
 
   useEffect(() => {
     if (isAuthenticated) {
-      navigate("/");
+      setIsLoading(true);
+      const timer = setTimeout(() => {
+        navigate("/");
+      }, 1000);
+      return () => clearTimeout(timer);
     }
   }, [isAuthenticated, navigate]);
 
@@ -35,9 +39,9 @@ export default function LoginForm() {
       email: Yup.string().email("Invalid email address").required("Required"),
       password: Yup.string().required("Please enter your password"),
     }),
-    onSubmit: (values) => {
+    onSubmit: async (values) => {
       setIsLoading(true);
-      dispatch(login(values));
+      await dispatch(login(values));
       setIsLoading(false);
     },
   });
@@ -78,7 +82,7 @@ export default function LoginForm() {
               name="email"
               value={formik.values.email}
               onChange={formik.handleChange}
-              placeholder="Your email address"
+              placeholder="Email"
               aria-label="Email"
               disabled={isLoading}
             />
@@ -94,7 +98,7 @@ export default function LoginForm() {
               name="password"
               value={formik.values.password}
               onChange={formik.handleChange}
-              placeholder="Create a password"
+              placeholder="Password"
               aria-label="Password"
               disabled={isLoading}
             />

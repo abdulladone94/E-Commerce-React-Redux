@@ -22,7 +22,7 @@ export default function SignUpForm() {
       setIsLoading(true);
       const timer = setTimeout(() => {
         navigate("/login");
-      }, 7000); // Redirect after 3 seconds
+      }, 1000);
 
       return () => clearTimeout(timer);
     }
@@ -85,7 +85,7 @@ export default function SignUpForm() {
             value={formik.values.name}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            placeholder="Your name"
+            placeholder="Full Name"
             aria-label="Name"
             disabled={isLoading}
           />
@@ -154,10 +154,6 @@ export default function SignUpForm() {
               "Sign Up"
             )}
           </Button>
-
-          {/* <Button type="submit" className="w-full">
-            Sign Up
-          </Button> */}
         </form>
         <p className="mt-3">
           Already have an account? <Link to="/login">Login</Link>

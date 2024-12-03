@@ -30,10 +30,10 @@ const Header = () => {
       >
         Home
       </Link>
-      <div className="flex  items-center">
+      <div className="flex items-center">
         <Link
           to="/sign-in"
-          className="w-24 font-semibold mr-3 md:mr-8 outline outline-offset-1 md:px-5 rounded-md hover:bg-blue-300"
+          className="w-24 text-center font-semibold mr-3 md:mr-8 outline outline-offset-1 md:px-5 rounded-md hover:bg-blue-300"
         >
           Logout
         </Link>
