@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = {
   isAuthenticated: false,
   user: null,
+  error: null,
 };
 
 const authSlice = createSlice({
@@ -23,17 +24,23 @@ const authSlice = createSlice({
       if (user) {
         state.isAuthenticated = true;
         state.user = user;
+        state.error = null;
       } else {
         state.isAuthenticated = false;
         state.user = null;
+        state.error = "Invalid email or password";
       }
     },
     logout: (state) => {
       state.isAuthenticated = false;
       state.user = null;
+      state.error = null;
+    },
+    clearError: (state) => {
+      state.error = null;
     },
   },
 });
 
-export const { register, login, logout } = authSlice.actions;
+export const { register, login, logout, clearError } = authSlice.actions;
 export default authSlice.reducer;
